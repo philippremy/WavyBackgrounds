@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A056AB22B1B5E870025F167 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A056AB12B1B5E870025F167 /* AVFoundation.framework */; };
+		7A056AB42B1B5E910025F167 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A056AB32B1B5E910025F167 /* Foundation.framework */; };
+		7A056AB62B1B5EA50025F167 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A056AB52B1B5EA50025F167 /* AppKit.framework */; };
 		7A71C0E42AF14549007EEEE0 /* WavyBackgrounds.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A71C0E32AF14549007EEEE0 /* WavyBackgrounds.h */; };
 		7A71C0E62AF14549007EEEE0 /* WavyBackgrounds.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A71C0E52AF14549007EEEE0 /* WavyBackgrounds.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7A71C0E02AF14549007EEEE0 /* libWavyBackgrounds.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libWavyBackgrounds.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A056AB12B1B5E870025F167 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7A056AB32B1B5E910025F167 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7A056AB52B1B5EA50025F167 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		7A71C0E02AF14549007EEEE0 /* liblibWavyBackgrounds.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = liblibWavyBackgrounds.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A71C0E32AF14549007EEEE0 /* WavyBackgrounds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WavyBackgrounds.h; sourceTree = "<group>"; };
 		7A71C0E52AF14549007EEEE0 /* WavyBackgrounds.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WavyBackgrounds.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -22,24 +28,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A056AB62B1B5EA50025F167 /* AppKit.framework in Frameworks */,
+				7A056AB22B1B5E870025F167 /* AVFoundation.framework in Frameworks */,
+				7A056AB42B1B5E910025F167 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A056AB02B1B5E870025F167 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A056AB52B1B5EA50025F167 /* AppKit.framework */,
+				7A056AB32B1B5E910025F167 /* Foundation.framework */,
+				7A056AB12B1B5E870025F167 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7A71C0D72AF14549007EEEE0 = {
 			isa = PBXGroup;
 			children = (
 				7A71C0E22AF14549007EEEE0 /* WavyBackgrounds */,
 				7A71C0E12AF14549007EEEE0 /* Products */,
+				7A056AB02B1B5E870025F167 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		7A71C0E12AF14549007EEEE0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7A71C0E02AF14549007EEEE0 /* libWavyBackgrounds.dylib */,
+				7A71C0E02AF14549007EEEE0 /* liblibWavyBackgrounds.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,9 +87,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7A71C0DF2AF14549007EEEE0 /* WavyBackgrounds */ = {
+		7A71C0DF2AF14549007EEEE0 /* libWavyBackgrounds */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7A71C0E92AF14549007EEEE0 /* Build configuration list for PBXNativeTarget "WavyBackgrounds" */;
+			buildConfigurationList = 7A71C0E92AF14549007EEEE0 /* Build configuration list for PBXNativeTarget "libWavyBackgrounds" */;
 			buildPhases = (
 				7A71C0DC2AF14549007EEEE0 /* Headers */,
 				7A71C0DD2AF14549007EEEE0 /* Sources */,
@@ -79,9 +99,9 @@
 			);
 			dependencies = (
 			);
-			name = WavyBackgrounds;
+			name = libWavyBackgrounds;
 			productName = WavyBackgrounds;
-			productReference = 7A71C0E02AF14549007EEEE0 /* libWavyBackgrounds.dylib */;
+			productReference = 7A71C0E02AF14549007EEEE0 /* liblibWavyBackgrounds.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -98,7 +118,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7A71C0DB2AF14549007EEEE0 /* Build configuration list for PBXProject "WavyBackgrounds" */;
+			buildConfigurationList = 7A71C0DB2AF14549007EEEE0 /* Build configuration list for PBXProject "libWavyBackgrounds" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -111,7 +131,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7A71C0DF2AF14549007EEEE0 /* WavyBackgrounds */,
+				7A71C0DF2AF14549007EEEE0 /* libWavyBackgrounds */,
 			);
 		};
 /* End PBXProject section */
@@ -256,7 +276,7 @@
 				DYLIB_INSTALL_NAME_BASE = "";
 				EXECUTABLE_PREFIX = lib;
 				LD_DYLIB_INSTALL_NAME = ../Libraries/libWavyBackgrounds.dylib;
-				MACH_O_TYPE = staticlib;
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -272,7 +292,7 @@
 				DYLIB_INSTALL_NAME_BASE = "";
 				EXECUTABLE_PREFIX = lib;
 				LD_DYLIB_INSTALL_NAME = ../Libraries/libWavyBackgrounds.dylib;
-				MACH_O_TYPE = staticlib;
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -281,7 +301,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7A71C0DB2AF14549007EEEE0 /* Build configuration list for PBXProject "WavyBackgrounds" */ = {
+		7A71C0DB2AF14549007EEEE0 /* Build configuration list for PBXProject "libWavyBackgrounds" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A71C0E72AF14549007EEEE0 /* Debug */,
@@ -290,7 +310,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7A71C0E92AF14549007EEEE0 /* Build configuration list for PBXNativeTarget "WavyBackgrounds" */ = {
+		7A71C0E92AF14549007EEEE0 /* Build configuration list for PBXNativeTarget "libWavyBackgrounds" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A71C0EA2AF14549007EEEE0 /* Debug */,
