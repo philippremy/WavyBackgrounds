@@ -1,0 +1,47 @@
+.container {
+  width: calc(100vw - 20px);
+  height: 100vh;
+  background-color: whitesmoke;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-block: 10px;
+  padding-inline: 10px;
+  overflow: scroll;
+}
+
+.footer {
+  width: calc(100vw - 30px);
+  height: 50px;
+  position: fixed;
+  bottom: 0;
+  background-color: rgb(174, 174, 178);
+  box-shadow: -10px 0 10px #00000020;
+  display: flex;
+  align-items: center;
+  padding-inline: 15px;
+  justify-content: space-between;
+}
+
+.applyLabel {
+  color: rgb(124, 124, 124);
+  margin-right: 10px;
+}
+
+.footerSpaceSelection {
+  display: flex;
+  align-items: center;
+}
+
+.selector {
+  width: 200px;
+}
+
+.footerButtons {
+  display: flex;
+  align-items: center;
+}
+
+.applyButton {
+  margin-left: 10px;
+}

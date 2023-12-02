@@ -1,0 +1,56 @@
+{
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist",
+    "withGlobalTauri": false
+  },
+  "package": {
+    "productName": "WavyBackgrounds",
+    "version": "0.0.1"
+  },
+  "tauri": {
+    "systemTray": {
+      "iconPath": "../public/systemTray.png",
+      "iconAsTemplate": true
+    },
+    "allowlist": {
+      "all": false,
+      "dialog": {
+        "all": true
+      },
+      "shell": {
+        "all": false,
+        "open": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "de.philippremy.wavybackgrounds",
+      "icon": [
+        "icons/icon.icns"
+      ],
+      "macOS": {
+        "minimumSystemVersion": "10.13",
+        "entitlements": "./ent.plist",
+        "signingIdentity": "D4C3865030FE5150FA89C31D10C7DE7D3D75F68D",
+        "providerShortName": "Philipp Remy"
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "WavyBackgrounds",
+        "width": 700,
+        "height": 600,
+        "label": "mainUI"
+      }
+    ]
+  }
+}
