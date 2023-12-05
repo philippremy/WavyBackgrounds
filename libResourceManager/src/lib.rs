@@ -1,6 +1,7 @@
 #![allow(unused_variables, dead_code, non_snake_case)]
 
-use std::fs::{OpenOptions};
+use std::cmp::min;
+use std::fs::OpenOptions;
 use std::io::{BufReader, Cursor, Write};
 use std::path::{Path, PathBuf};
 use plist::Value;
@@ -9,6 +10,7 @@ use serde::Serialize;
 use tauri::{AppHandle, Manager};
 use libVisualPanic::ErrorHandlingResult;
 use libVisualPanic::ErrorHandlingOption;
+use futures_util::stream::StreamExt;
 
 #[derive(Debug, Clone, Serialize, Default)]
 pub struct LocalSaveCheck {
@@ -88,29 +90,60 @@ pub fn get_full_database(app_handle: &AppHandle) -> Option<Vec<WallpaperVideoEnt
     }
 }
 
-pub fn download(identifier: String, url: String, app_handle: AppHandle, app_handle2: AppHandle, app_handle3: AppHandle) -> Option<String> {
+pub async fn download(identifier: String, url: String, app_handle: AppHandle, app_handle2: AppHandle, app_handle3: AppHandle) -> Option<String> {
     let mut file_path = get_home_directory();
     let mut dir_path = get_home_directory();
     dir_path = dir_path.join(".WavyBackgrounds");
     file_path = file_path.join(format!(".WavyBackgrounds/{}.mov", identifier).as_str());
+
+    /* HERE START OF CURL STUFF
     let mut downloader = curl::easy::Easy::new();
-    downloader.progress(true).expect_visual_no_default("Failed to apply progress flag to CURL.", &app_handle).unwrap();
-    downloader.url(url.as_str()).expect_visual_no_default("Failed to parse the URL to the online Video.", &app_handle).unwrap();
+    println!("Here we were.");
+    downloader.progress(true).expect("Failed to apply progress flag to CURL.");
+    downloader.url(url.as_str()).expect("Failed to parse the URL to the online Video.");
+    println!("Here we were 2.");
+    let file_path2 = file_path.clone();
+    std::fs::create_dir_all(Path::new(dir_path.as_path())).expect("Failed to create folders");
+    downloader.write_function(move |data| {
+        let mut file = OpenOptions::new().create(true).write(true).append(true).read(true).open(file_path.clone()).expect("Failed to open file for write access...");
+        file.write(data).expect("Failed to write contents from the &[u8] buffer to the file.");
+        Ok(data.len())
+    }).expect("CURL Write Function failed.");
+    println!("Here we were. 3");
+    downloader.progress_function(move |expected_download, current_download, _, _| {
+        app_handle3.emit_all(&*format!("progress_{identifier}"), [expected_download, current_download]).expect("Failed to emit progress to frontend");
+        return true;
+    }).expect("Failed to register and execute the progress callback function by CURL.");
+    downloader.perform().expect("CURL could not perform the requested operation.");
+    println!("Here we were. 4");
+    HERE END OF CURL STUFF */ 
+
+    let res = reqwest::Client::new()
+        .get(url)
+        .send()
+        .await
+        .expect("Failed to resolve GET request to download file.");
+
+    let total_size = res
+        .content_length()
+        .expect("Failed to extract final size from GET request");
 
     let file_path2 = file_path.clone();
-    std::fs::create_dir_all(Path::new(dir_path.as_path())).expect_visual_no_default("Failed to create folders", & app_handle).unwrap();
+    std::fs::create_dir_all(Path::new(dir_path.as_path())).expect("Failed to create folders");
+    let mut file = OpenOptions::new().create(true).write(true).append(true).read(true).open(file_path.clone()).expect("Failed to open file for write access...");
 
-    downloader.write_function(move |data| {
-        let mut file = OpenOptions::new().create(true).write(true).append(true).read(true).open(file_path.clone()).expect_visual_no_default("Failed to open file for write access...", &app_handle).unwrap();
-        file.write(data).expect_visual("Failed to write contents from the &[u8] buffer to the file.", &app_handle);
-        Ok(data.len())
-    }).expect_visual("CURL Write Function failed.", &app_handle2);
-    downloader.progress_function(move |expected_download, current_download, _, _| {
-        app_handle3.emit_all(&*format!("progress_{identifier}"), [expected_download, current_download]).expect_visual("Failed to emit progress to frontend", &app_handle3);
-        return true;
-    }).expect_visual_no_default("Failed to register and execute the progress callback function by CURL.", &app_handle2).unwrap();
-    downloader.perform().expect_visual("CURL could not perform the requested operation.", &app_handle2);
-    let file = std::fs::File::open(file_path2.clone()).expect_visual_no_default("Failed to open the File", &app_handle2).unwrap();
+    let mut downloaded: u64 = 0;
+    let mut stream = res.bytes_stream();
+
+    while let Some(item) = stream.next().await {
+        let chunk = item.expect("Failed to download file completely!");
+        file.write_all(&chunk).expect("Failed to write next chunk to file.");
+        let new = min(downloaded + (chunk.len() as u64), total_size);
+        downloaded = new;
+        app_handle3.emit_all(format!("progress_{identifier}").as_str(), [total_size, downloaded]).expect("Failed to emit progress to frontend");
+    }
+
+    let file = std::fs::File::open(file_path2.clone()).expect("Failed to open the File");
     if !file_path2.exists() {
         return None;
     } else {

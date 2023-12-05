@@ -47,7 +47,7 @@ fn get_full_database_command(app_handle: AppHandle) -> Vec<WallpaperVideoEntry>{
 
 #[tauri::command]
 async fn download_file(identifier: String, url: String, app_handle: AppHandle) -> Option<String> {
-    return libResourceManager::download(identifier, url, app_handle.clone(), app_handle.clone(), app_handle.clone());
+    return libResourceManager::download(identifier, url, app_handle.clone(), app_handle.clone(), app_handle.clone()).await;
 }
 
 #[tauri::command]
@@ -65,7 +65,7 @@ fn apply_to_screen(identifier: String) {
 fn remove_all() {
     unsafe {
         WINDOW_VEC.retain(|window| {
-            libDynamicWallpapaper::close_window(window.clone());
+            libDynamicWallpapaper::close_window(window);
             return true;
         });
     }
@@ -117,10 +117,12 @@ fn main() {
                     }
                     else if id.as_str() == "close_backgrounds" {
                         unsafe {
-                            WINDOW_VEC.retain(|window| {
-                                libDynamicWallpapaper::close_window(window.clone());
-                                return true;
-                            });
+                            unsafe {
+                                WINDOW_VEC.retain(|window| {
+                                    libDynamicWallpapaper::close_window(window);
+                                    return true;
+                                });
+                            }
                         }
                     }
                    /* Currently produces a segfault.

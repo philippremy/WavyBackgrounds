@@ -11,7 +11,7 @@ unsafe fn get_current_screen() -> Id<NSScreen> {
     return NSScreen::mainScreen().unwrap();
 }
 
-pub fn close_window(window: Id<NSWindow>) {
+pub fn close_window(window: &Id<NSWindow>) {
     unsafe { window.close(); };
 }
 

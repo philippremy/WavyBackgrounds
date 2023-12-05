@@ -46,11 +46,6 @@ function App() {
     let containerElement: HTMLDivElement | undefined;
     let [selected, setSelected] = createSignal("");
 
-    const unlisten = listen("visual_panic", (event) => {
-        let message = "An error occured.\nError: " + event.payload.error + "\nMessage: " + event.payload.message + "\nMemory Address: " + event.payload.location + "\nThe app must terminate. Do you want to send feedback to the developers?";
-        ask(message, {type: "error", title: "WavyBackgrounds: Visual Panic"}).then(() => emit("final_panic"));
-    }).then(() => {});
-
     onMount(() => {
         invoke("get_full_database_command").then((database) => {
             for (const databaseElement: WallpaperVideoEntry of database) {
