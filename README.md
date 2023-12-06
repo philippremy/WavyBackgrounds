@@ -12,7 +12,7 @@ A simple program to emulate the dynamic desktop wallpapers from macOS Sonoma.
 - Control the app without a main window by using the System Tray
 
 ## Dependencies
-- Rust (Nightly-Chain)
+- Rust (Nightly-Chain)[^1]
 - Node (npm)
 
 ## Building the application
@@ -26,3 +26,5 @@ $ npm run tauri build                                      # Just build the curr
 $ npm run tauri build -- --target universal-apple-darwin   # Build a universal binary (requires both Rust Chains to be installed!)
 $ npm run tauri dev                                        # Build a live development build with Hot Reloading
 ```
+
+[^1]: If you have multiple Rust toolchains installed: First set your compiler default to nightly: `rustup default nightly`.
