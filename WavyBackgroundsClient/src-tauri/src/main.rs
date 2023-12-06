@@ -6,7 +6,6 @@
 
 use tauri::{AppHandle, CustomMenuItem, Manager, RunEvent, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, SystemTraySubmenu, WindowBuilder, WindowUrl};
 use libResourceManager::{chec_for_local, delete_local_resource, get_full_database, LocalSaveCheck, WallpaperVideoEntry};
-use libVisualPanic::ErrorHandlingOption;
 
 #[tauri::command]
 fn delete_local(identifier: String) -> bool {
@@ -15,7 +14,7 @@ fn delete_local(identifier: String) -> bool {
 
 #[tauri::command]
 fn get_full_database_command(app_handle: AppHandle) -> Vec<WallpaperVideoEntry>{
-    let vec: Vec<WallpaperVideoEntry> = get_full_database(&app_handle).expect_visual("Failed to get database. Maybe the file is corrupt or we are running a non-Sonoma System?", &app_handle);
+    let vec: Vec<WallpaperVideoEntry> = get_full_database(&app_handle).unwrap();
     let mwb_menu = CustomMenuItem::new("main_window_show", "Bring back Application Window");
     let mut allsubmenu_menu = SystemTrayMenu::new();
     for entry in vec.clone() {

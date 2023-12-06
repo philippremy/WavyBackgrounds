@@ -1561,25 +1561,14 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "libResourceManager"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "directories",
  "futures-util",
- "libVisualPanic",
  "libsqlite3-sys",
  "plist",
  "reqwest",
  "rusqlite",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
-]
-
-[[package]]
-name = "libVisualPanic"
-version = "0.1.0"
-dependencies = [
  "serde",
  "serde_json",
  "tauri",

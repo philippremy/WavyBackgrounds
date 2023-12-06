@@ -1632,25 +1632,14 @@ dependencies = [
 
 [[package]]
 name = "libResourceManager"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "directories",
  "futures-util",
- "libVisualPanic",
  "libsqlite3-sys",
  "plist",
  "reqwest",
  "rusqlite",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
-]
-
-[[package]]
-name = "libVisualPanic"
-version = "0.1.0"
-dependencies = [
  "serde",
  "serde_json",
  "tauri",

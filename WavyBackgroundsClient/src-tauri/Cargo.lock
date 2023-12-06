@@ -9,7 +9,6 @@ dependencies = [
  "icrate",
  "libDynamicWallpapaper",
  "libResourceManager",
- "libVisualPanic",
  "once_cell",
  "serde",
  "serde_json",
@@ -1651,21 +1650,10 @@ version = "0.1.1"
 dependencies = [
  "directories",
  "futures-util",
- "libVisualPanic",
  "libsqlite3-sys",
  "plist",
  "reqwest",
  "rusqlite",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
-]
-
-[[package]]
-name = "libVisualPanic"
-version = "0.1.0"
-dependencies = [
  "serde",
  "serde_json",
  "tauri",

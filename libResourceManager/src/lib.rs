@@ -8,8 +8,6 @@ use plist::Value;
 use std::string::String;
 use serde::Serialize;
 use tauri::{AppHandle, Manager};
-use libVisualPanic::ErrorHandlingResult;
-use libVisualPanic::ErrorHandlingOption;
 use futures_util::stream::StreamExt;
 
 #[derive(Debug, Clone, Serialize, Default)]
@@ -35,31 +33,35 @@ pub fn get_full_database(app_handle: &AppHandle) -> Option<Vec<WallpaperVideoEnt
 
     let aerial_db_file: PathBuf = Path::new(AERIAL_ROOT_DIR).join("Aerial.sqlite");
     assert!(aerial_db_file.exists(), "It appears we are not on a Sonoma System. Aborting... (Custom Videos are WIP!)");
-    let conn = rusqlite::Connection::open_with_flags(aerial_db_file, rusqlite::OpenFlags::SQLITE_OPEN_READ_ONLY).expect_visual_no_default("Failed to read the database in read-only state.", &app_handle).unwrap();
-    let mut stmt = conn.prepare("SELECT * FROM ZASSET").expect_visual_no_default("Failed to prepare the fetch statement.", &app_handle).unwrap();
+    let conn = rusqlite::Connection::open_with_flags(aerial_db_file, rusqlite::OpenFlags::SQLITE_OPEN_READ_ONLY).unwrap();
+    let mut stmt = conn.prepare("SELECT * FROM ZASSET").unwrap();
+    let fn_col = stmt.column_index("ZACCESSIBILITYLABEL").expect("There is no column called 'ZACCESSIBILITYLABEL'");
+    let urlplist_col = stmt.column_index("ZREMOTEURLS").expect("There is no column called 'ZREMOTEURLS'");
+    let preview_col = stmt.column_index("ZPREVIEWIMAGEURL").expect("There is no column called 'ZPREVIEWIMAGEURL'");
+    let ident_col = stmt.column_index("ZIDENTIFIER").expect("There is no column called 'ZIDENTIFIER'");
     let entry_iter = stmt.query_map([], |row| {
         Ok(WallpaperVideoEntry {
-            friendly_name: row.get::<usize, String>(8).expect_visual("Failed to get Friendly Name.", &app_handle).to_string(),
-            video_url_plist: row.get::<usize, Vec<u8>>(15).expect_visual("Failed to get Video URL Plist.", &app_handle),
+            friendly_name: row.get::<usize, String>(fn_col).unwrap().to_string(),
+            video_url_plist: row.get::<usize, Vec<u8>>(urlplist_col).unwrap(),
             video_url: String::new(),
-            preview_image_url: row.get::<usize, String>(13).expect_visual("Failed to get Preview Image URL.", &app_handle).to_string(),
-            identifier: row.get::<usize, String>(10).expect_visual("Failed to get Identifier.", &app_handle).to_string(),
+            preview_image_url: row.get::<usize, String>(preview_col).unwrap().to_string(),
+            identifier: row.get::<usize, String>(ident_col).unwrap().to_string(),
             preview_image_save_path: None,
             video_save_path: None
         })
-    }).expect_visual_no_default("Failed to execute the statement and fetch the results.", &app_handle).unwrap();
+    }).unwrap();
 
     let mut available_wallpaper_vec: Vec<WallpaperVideoEntry> = Vec::new();
 
     for entry_result in entry_iter {
         if entry_result.is_ok() {
-            let mut entry = entry_result.expect_visual("Failed to get value (should never happen)", &app_handle).clone();
+            let mut entry = entry_result.unwrap().clone();
             let plist_vec = entry.video_url_plist.clone();
             let plist_slice = plist_vec.as_slice();
             let plist_cursor = Cursor::new(plist_slice);
             let reader = BufReader::new(plist_cursor);
-            let temp_value = Value::from_reader(reader).expect_visual_no_default("Failed parse blob from reader.", &app_handle).unwrap();
-            let dictionary = temp_value.into_dictionary().expect_visual("Failed to get underlying dictionary of Plist.", &app_handle);
+            let temp_value = Value::from_reader(reader).unwrap();
+            let dictionary = temp_value.into_dictionary().unwrap();
             let dictionary_vec = dictionary.values();
             dictionary_vec.for_each(|dictionary_entry| {
                 match dictionary_entry.clone().into_array() {
@@ -95,28 +97,6 @@ pub async fn download(identifier: String, url: String, app_handle: AppHandle, ap
     let mut dir_path = get_home_directory();
     dir_path = dir_path.join(".WavyBackgrounds");
     file_path = file_path.join(format!(".WavyBackgrounds/{}.mov", identifier).as_str());
-
-    /* HERE START OF CURL STUFF
-    let mut downloader = curl::easy::Easy::new();
-    println!("Here we were.");
-    downloader.progress(true).expect("Failed to apply progress flag to CURL.");
-    downloader.url(url.as_str()).expect("Failed to parse the URL to the online Video.");
-    println!("Here we were 2.");
-    let file_path2 = file_path.clone();
-    std::fs::create_dir_all(Path::new(dir_path.as_path())).expect("Failed to create folders");
-    downloader.write_function(move |data| {
-        let mut file = OpenOptions::new().create(true).write(true).append(true).read(true).open(file_path.clone()).expect("Failed to open file for write access...");
-        file.write(data).expect("Failed to write contents from the &[u8] buffer to the file.");
-        Ok(data.len())
-    }).expect("CURL Write Function failed.");
-    println!("Here we were. 3");
-    downloader.progress_function(move |expected_download, current_download, _, _| {
-        app_handle3.emit_all(&*format!("progress_{identifier}"), [expected_download, current_download]).expect("Failed to emit progress to frontend");
-        return true;
-    }).expect("Failed to register and execute the progress callback function by CURL.");
-    downloader.perform().expect("CURL could not perform the requested operation.");
-    println!("Here we were. 4");
-    HERE END OF CURL STUFF */ 
 
     let res = reqwest::Client::new()
         .get(url)
