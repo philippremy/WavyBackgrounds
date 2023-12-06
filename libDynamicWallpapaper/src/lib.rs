@@ -1,9 +1,12 @@
 #![allow(non_snake_case)]
+#![feature(const_async_blocks)]
+#![feature(type_alias_impl_trait)]
 
-use icrate::AppKit::{NSBackingStoreBuffered, NSScreen, NSView, NSWindow, NSWindowStyleMaskUnifiedTitleAndToolbar};
+use icrate::AppKit::{NSBackingStoreBuffered, NSScreen, NSView, NSWindow, NSWindowStyleMaskUnifiedTitleAndToolbar, NSUserInterfaceItemIdentification, NSApp};
 use icrate::objc2::{class, ClassType, msg_send};
 use icrate::objc2::rc::Id;
 use std::borrow::Borrow;
+use std::ptr::NonNull;
 use icrate::Foundation::{NSString, NSURL};
 use icrate::objc2::runtime::AnyObject;
 
@@ -11,26 +14,51 @@ unsafe fn get_current_screen() -> Id<NSScreen> {
     return NSScreen::mainScreen().unwrap();
 }
 
-pub fn close_window(window: &Id<NSWindow>) {
-    unsafe { window.close(); };
-}
-
-/* Currently producing a segfault.
-pub fn close_window_on_screen(window: Id<NSWindow>) -> bool {
-    let mut remove = false;
+pub fn close_window(window_identifier: String) {
     unsafe {
-        if window.isOnActiveSpace() {
-            remove = true;
-            window.close();
+        let nsapp = NSApp.unwrap();
+        for open_window in nsapp.windows() {
+            match open_window.identifier() {
+                Some(ident) => {
+                    println!("{}", ident.to_string());
+                    if ident.to_string() == window_identifier {
+                        open_window.close();
+                    }
+                },
+                None => {},
+            }
         }
     }
-    return remove;
 }
-*/
 
-pub fn apply_to_screen(identifier: String) -> Id<NSWindow> {
+pub fn close_window_on_screen(window_identifier: String) -> bool {
+    unsafe {
+        let mut remove = true;
+        let nsapp = NSApp.unwrap();
+        for open_window in nsapp.windows() {
+            match open_window.identifier() {
+                Some(ident) => {
+                    println!("{}", ident.to_string());
+                    if ident.to_string() == window_identifier {
+                        if open_window.isOnActiveSpace() {
+                            remove = false;
+                            open_window.close();
+                            return remove;
+                        }
+                    }
+                },
+                None => {},
+            }
+        }
+        return remove;
+    }
+}
 
-    let file_path = libResourceManager::get_file_path(identifier);
+static mut FRAME_COUNT: u64 = 0;
+
+pub fn apply_to_screen(identifier: String) -> String {
+
+    let file_path = libResourceManager::get_file_path(identifier.clone());
 
     unsafe {
         let screen = get_current_screen();
@@ -45,6 +73,8 @@ pub fn apply_to_screen(identifier: String) -> Id<NSWindow> {
         );
         background_window.makeKeyAndOrderFront(None);
         background_window.setLevel(-2147483628 + 15);
+        // BRUDER FUCKING FINALLY! WAS SOLL DAS DIGGA SIEHE ZEILE DRUNTER BRUDIIIII
+        background_window.setReleasedWhenClosed(false);
         let view_alloc = NSView::alloc().unwrap();
         let view = NSView::initWithFrame(Some(view_alloc), frame);
         background_window.setContentView(Some(view.borrow()));
@@ -65,6 +95,19 @@ pub fn apply_to_screen(identifier: String) -> Id<NSWindow> {
         let _: () = msg_send![&*av_player, play];
         background_window.setCollectionBehavior(16);
 
-        return background_window;
+        // We successfully created a Window, lets increase this.
+        FRAME_COUNT += 1;
+
+        let mut window_identfier = FRAME_COUNT.to_string();
+        window_identfier.push_str("_");
+        window_identfier.push_str(identifier.clone().as_str());
+        let non_null_str = window_identfier.as_mut_ptr() as *mut i8;
+        let identifier_alloc = NSString::alloc().unwrap();
+        let identifier_ns_str = NSString::initWithUTF8String(Some(identifier_alloc), NonNull::new(non_null_str).unwrap()).unwrap();
+        
+        // Set a unique identifier!
+        background_window.setIdentifier(Some(&identifier_ns_str));
+
+        return window_identfier;
     };
 }

@@ -6,5 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-icrate = {version = "0.0.4", features = ["AppKit", "AppKit_NSWindow", "AppKit_NSScreen", "AppKit_NSView",  "Foundation", "Foundation_NSString", "Foundation_NSURL"]}
+icrate = {version = "0.0.4", features = ["AppKit", "AppKit_NSWindow", "AppKit_NSScreen", "AppKit_NSView",  "Foundation", "Foundation_NSString", "Foundation_NSURL", "AppKit_NSApplication"]}
+objc2 = {version = "0.5.0", features = ["catch-all", "unstable-autoreleasesafe"]}
 libResourceManager = { path = "../libResourceManager" }
+globals = "1.0.3"

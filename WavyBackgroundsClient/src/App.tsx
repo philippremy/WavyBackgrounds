@@ -21,7 +21,7 @@ interface WallpaperVideoEntry {
 
 function App() {
 
-    function downloadVideo() {
+    async function downloadVideo() {
         let selected_card = selected();
         let wallpaper_struct = entries.get(selected_card);
         let download_url = wallpaper_struct.video_url;
@@ -30,7 +30,7 @@ function App() {
         let unlisten = listen("progress_" + identifier, (event) => {
             wallpaper_struct.download_progress[1]((event.payload[1]/event.payload[0]*100).toString());
         })
-        invoke("download_file", {identifier: identifier, url: download_url}).then((result: string | null) => {
+        await invoke("download_file", {identifier: identifier, url: download_url}).then((result: string | null) => {
             if(result === null) {
 
             } else {
@@ -77,11 +77,21 @@ function App() {
                     <button onClick={async () => {
                         await invoke("remove_all");
                     }}>Remove all dynamic backgrounds</button>
+                    <button onClick={async ()=> {
+                        await invoke("remove_current_space");
+                    }}>Remove dynamic backgrounds on current space</button>
                 </div>
                 <div class={"footerButtons"}>
                     <button onClick={() => downloadVideo()}>Download</button>
                     <button class={"applyButton"} onclick={async () => {
-                        await invoke("apply_to_screen", {identifier: selected()});
+                        await invoke("check_if_local_exists", {identifier: selected()}).then(async (answer)=> {
+                            if(answer.is_saved) {
+                                await invoke("apply_to_screen", {identifier: selected()});
+                            } else {
+                                await downloadVideo();
+                                await invoke("apply_to_screen", {identifier: selected()});
+                            }
+                        });
                     }}>Apply</button>
                 </div>
             </div>

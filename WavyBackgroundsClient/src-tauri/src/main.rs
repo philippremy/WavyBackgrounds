@@ -4,8 +4,6 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use icrate::AppKit::NSWindow;
-use icrate::objc2::rc::Id;
 use tauri::{AppHandle, CustomMenuItem, Manager, RunEvent, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, SystemTraySubmenu, WindowBuilder, WindowUrl};
 use libResourceManager::{chec_for_local, delete_local_resource, get_full_database, LocalSaveCheck, WallpaperVideoEntry};
 use libVisualPanic::ErrorHandlingOption;
@@ -36,9 +34,8 @@ fn get_full_database_command(app_handle: AppHandle) -> Vec<WallpaperVideoEntry>{
         .add_submenu(favorite_submenu)
         .add_submenu(all_submenu)
         .add_native_item(SystemTrayMenuItem::Separator)
-        .add_item(CustomMenuItem::new("close_backgrounds", "Remove all dynamic wallpapers"));
-        // Currently produces a segfault.
-        //.add_item(CustomMenuItem::new("close_background_active_space", "Remove dynamic wallpapers on active space"))
+        .add_item(CustomMenuItem::new("close_backgrounds", "Remove all dynamic wallpapers"))
+        .add_item(CustomMenuItem::new("close_background_active_space", "Remove dynamic wallpapers on active space"));
 
     app_handle.tray_handle().set_menu(tray_menu).unwrap();
 
@@ -57,21 +54,31 @@ fn check_if_local_exists(identifier: String) -> LocalSaveCheck {
 
 #[tauri::command]
 fn apply_to_screen(identifier: String) {
-    let window = libDynamicWallpapaper::apply_to_screen(identifier);
-    unsafe { WINDOW_VEC.push(window); };
+    let window_identifier = libDynamicWallpapaper::apply_to_screen(identifier);
+    unsafe { WINDOW_VEC.push(window_identifier); };
 }
 
 #[tauri::command]
 fn remove_all() {
     unsafe {
-        WINDOW_VEC.retain(|window| {
-            libDynamicWallpapaper::close_window(window);
-            return true;
+        WINDOW_VEC.retain(|window_identfier| {
+            libDynamicWallpapaper::close_window(window_identfier.to_string());
+            return false;
         });
     }
 }
 
-static mut WINDOW_VEC: Vec<Id<NSWindow>> = vec![];
+#[tauri::command]
+fn remove_current_space() {
+    unsafe {
+        WINDOW_VEC.retain(|window_identfier| {
+            let remove_this = libDynamicWallpapaper::close_window_on_screen(window_identfier.to_string());
+            return remove_this;
+        });
+    }
+}
+
+static mut WINDOW_VEC: Vec<String> = vec![];
 
 fn main() {
 
@@ -87,15 +94,14 @@ fn main() {
         .add_submenu(favorite_submenu)
         .add_submenu(all_submenu)
         .add_native_item(SystemTrayMenuItem::Separator)
-        .add_item(CustomMenuItem::new("close_backgrounds", "Remove all dynamic wallpapers"));
-        // Currently produces a segfault.
-        //.add_item(CustomMenuItem::new("close_background_active_space", "Remove dynamic wallpapers on active space"));
+        .add_item(CustomMenuItem::new("close_backgrounds", "Remove all dynamic wallpapers"))
+        .add_item(CustomMenuItem::new("close_background_active_space", "Remove dynamic wallpapers on active space"));
 
     let tray = SystemTray::new().with_menu(tray_menu).with_tooltip("WavyBackgrounds");
 
     tauri::Builder::default()
         .system_tray(tray)
-        .invoke_handler(tauri::generate_handler![get_full_database_command, download_file, delete_local, check_if_local_exists, apply_to_screen, remove_all])
+        .invoke_handler(tauri::generate_handler![get_full_database_command, download_file, delete_local, check_if_local_exists, apply_to_screen, remove_all, remove_current_space])
         .setup(|_app| {
             Ok(())
         })
@@ -117,23 +123,20 @@ fn main() {
                     }
                     else if id.as_str() == "close_backgrounds" {
                         unsafe {
-                            unsafe {
-                                WINDOW_VEC.retain(|window| {
-                                    libDynamicWallpapaper::close_window(window);
-                                    return true;
-                                });
-                            }
-                        }
-                    }
-                   /* Currently produces a segfault.
-                    else if id.as_str() == "close_background_active_space" {
-                        unsafe {
-                            WINDOW_VEC.retain(|window| {
-                                return !libDynamicWallpapaper::close_window_on_screen(window.clone());
+                            WINDOW_VEC.retain(|window_identfier| {
+                                libDynamicWallpapaper::close_window(window_identfier.to_string());
+                                return false;
                             });
                         }
                     }
-                    */
+                    else if id.as_str() == "close_background_active_space" {
+                        unsafe {
+                            WINDOW_VEC.retain(|window_identfier| {
+                                let remove_this = libDynamicWallpapaper::close_window_on_screen(window_identfier.to_string());
+                                return remove_this;
+                            });
+                        }
+                    }
                     else {
                         apply_to_screen(id);
                     }
