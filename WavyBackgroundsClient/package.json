@@ -1,7 +1,7 @@
 {
-  "name": "WavyBackgroundsClient",
-  "version": "0.0.0",
-  "description": "",
+  "name": "WavyBackgrounds",
+  "version": "0.1.1",
+  "description": "An app to imitate the dynamic backgrounds from macOS Sonoma",
   "scripts": {
     "start": "vite",
     "dev": "vite",
