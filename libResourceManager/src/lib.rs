@@ -35,17 +35,13 @@ pub fn get_full_database(app_handle: &AppHandle) -> Option<Vec<WallpaperVideoEnt
     assert!(aerial_db_file.exists(), "It appears we are not on a Sonoma System. Aborting... (Custom Videos are WIP!)");
     let conn = rusqlite::Connection::open_with_flags(aerial_db_file, rusqlite::OpenFlags::SQLITE_OPEN_READ_ONLY).unwrap();
     let mut stmt = conn.prepare("SELECT * FROM ZASSET").unwrap();
-    let fn_col = stmt.column_index("ZACCESSIBILITYLABEL").expect("There is no column called 'ZACCESSIBILITYLABEL'");
-    let urlplist_col = stmt.column_index("ZREMOTEURLS").expect("There is no column called 'ZREMOTEURLS'");
-    let preview_col = stmt.column_index("ZPREVIEWIMAGEURL").expect("There is no column called 'ZPREVIEWIMAGEURL'");
-    let ident_col = stmt.column_index("ZIDENTIFIER").expect("There is no column called 'ZIDENTIFIER'");
     let entry_iter = stmt.query_map([], |row| {
         Ok(WallpaperVideoEntry {
-            friendly_name: row.get::<usize, String>(fn_col).unwrap().to_string(),
-            video_url_plist: row.get::<usize, Vec<u8>>(urlplist_col).unwrap(),
+            friendly_name: row.get::<&str, String>("ZACCESSIBILITYLABEL").unwrap().to_string(),
+            video_url_plist: row.get::<&str, Vec<u8>>("ZREMOTEURLS").unwrap(),
             video_url: String::new(),
-            preview_image_url: row.get::<usize, String>(preview_col).unwrap().to_string(),
-            identifier: row.get::<usize, String>(ident_col).unwrap().to_string(),
+            preview_image_url: row.get::<&str, String>("ZPREVIEWIMAGEURL").unwrap().to_string(),
+            identifier: row.get::<&str, String>("ZIDENTIFIER").unwrap().to_string(),
             preview_image_save_path: None,
             video_save_path: None
         })
