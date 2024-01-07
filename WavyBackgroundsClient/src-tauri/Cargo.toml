@@ -3,7 +3,7 @@ name = "WavyBackgrounds"
 version = "0.1.2"
 description = "An app to imitate the dynamic backgrounds from macOS Sonoma"
 authors = ["Philipp Remy"]
-license = "MIT"
+license = "GPL-3.0-or-later"
 repository = "https://github.com/philippremy/WavyBackgrounds.git"
 edition = "2021"
 
