@@ -5,9 +5,9 @@ import {invoke} from "@tauri-apps/api/tauri";
 
 export default function WallpaperOption(name: String, imageURL: String, videoURL: String, identifier: string, selected: () => string, setSelected: Setter<string>, localSaved: () => boolean, setLocalSaved: Setter<boolean>, downloadProgress: () => string, downloadInProgress: () => boolean) {
 
-    let localSave: boolean;
     let selectedContainer: HTMLDivElement | undefined;
-    let progressBar: HTMLDivElement;
+    let progressBar: HTMLDivElement | undefined;
+    let deleteDiv: HTMLDivElement | undefined;
 
     onMount(() => {
         const root = document.documentElement;
@@ -48,7 +48,7 @@ export default function WallpaperOption(name: String, imageURL: String, videoURL
             event.preventDefault();
             if(event.altKey) {
                 if(!localSaved()) {} else {
-                    ask("Are yout sure you want to delete the local video download?", {type: "info", title: "Confirm"}).then((selection) => {
+                    ask("Are you sure you want to delete the local video download?", {type: "info", title: "Confirm"}).then((selection) => {
                         if(selection) {
                             invoke("delete_local", {identifier: identifier}).then((result) => {
                                 if(result) {
@@ -63,12 +63,36 @@ export default function WallpaperOption(name: String, imageURL: String, videoURL
             } else {
                 setSelected(identifier);
             }
+        }} onMouseOver={() => {
+            if(localSaved()) {
+                deleteDiv?.classList.add("visible");
+            }
+        }} onMouseLeave={() => {
+            deleteDiv?.classList.remove("visible");
         }}>
             <img src={imageURL} class={"imagePreview"} alt={"NADA"}/>
             <p class={"textName"}>{name}</p>
             <p class={"identifier"}>{identifier}</p>
             <div hidden={!localSaved()} class={"localSave"}></div>
-            <div class={"progressDiv"} ref={progressBar} style={"background-image: conic-gradient(rgb(0, 122, 255) var(--degree_" + identifier + "), white 1deg);"}>
+            <div class={"progressDiv"} ref={progressBar} style={"background-image: conic-gradient(rgb(0, 122, 255) var(--degree_" + identifier + "), white 1deg);"}></div>
+            <div class="deleteDiv" ref={deleteDiv} onClick={() => {
+                if(!localSaved()) {} else {
+                    ask("Are you sure you want to delete the local video download?", {type: "info", title: "Confirm"}).then((selection) => {
+                        if(selection) {
+                            invoke("delete_local", {identifier: identifier}).then((result) => {
+                                if(result) {
+                                    setLocalSaved(false);
+                                } else {
+                                    message("Failed to delete local video file.", {title: "LocalDeleteOperationError", type: "error"}).then(() => {});
+                                }
+                            })
+                        } else {}
+                    })
+                }
+            }}>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
             </div>
         </div>
     );

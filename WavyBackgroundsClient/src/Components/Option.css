@@ -68,7 +68,7 @@
 }
 
 .visible {
-    display: flex;
+    display: flex !important;
 }
 
 .progressDiv::before {
@@ -77,4 +77,27 @@
     height: 10px;
     background: #efefef;
     border-radius: 100%;
+}
+
+.deleteDiv {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 8px;
+    left: 27.5px;
+    border: 1px solid darkgray;
+    border-radius: 100%;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px #00000020;
+    background-color: lightgrey;
+    display: none;
+    column-gap: 1.5px;
+}
+
+.dot {
+    width: 3.5px;
+    height: 3.5px;
+    border-radius: 100%;
+    background-color: darkgray;
 }
