@@ -1,11 +1,10 @@
-#![feature(panic_info_message)]
-#![feature(panic_update_hook)]
 #![allow(non_snake_case)]
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use libDynamicWallpapaper::id_matches_current_screen;
 use tauri::{AppHandle, CustomMenuItem, Manager, RunEvent, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, SystemTraySubmenu, WindowBuilder, WindowUrl};
-use libResourceManager::{chec_for_local, delete_local_resource, get_full_database, LocalSaveCheck, WallpaperVideoEntry};
+use libResourceManager::{check_for_local, delete_local_resource, get_full_database, LocalSaveCheck, WallpaperVideoEntry};
 
 #[tauri::command]
 fn delete_local(identifier: String) -> bool {
@@ -15,27 +14,7 @@ fn delete_local(identifier: String) -> bool {
 #[tauri::command]
 fn get_full_database_command(app_handle: AppHandle) -> Vec<WallpaperVideoEntry>{
     let vec: Vec<WallpaperVideoEntry> = get_full_database(&app_handle).unwrap();
-    let mwb_menu = CustomMenuItem::new("main_window_show", "Bring back Application Window");
-    let mut allsubmenu_menu = SystemTrayMenu::new();
-    for entry in vec.clone() {
-        let saved = chec_for_local(entry.identifier.clone());
-        if saved.is_saved {
-            allsubmenu_menu = allsubmenu_menu.add_item(CustomMenuItem::new(entry.identifier.clone(), entry.friendly_name.clone()));
-        }
-    }
-    let favorite_menu = SystemTrayMenu::new();
-    let all_submenu = SystemTraySubmenu::new("All cached videos", allsubmenu_menu);
-    let favorite_submenu = SystemTraySubmenu::new("Favourite videos", favorite_menu);
-
-    let tray_menu = SystemTrayMenu::new()
-        .add_item(mwb_menu)
-        .add_native_item(SystemTrayMenuItem::Separator)
-        .add_submenu(favorite_submenu)
-        .add_submenu(all_submenu)
-        .add_native_item(SystemTrayMenuItem::Separator)
-        .add_item(CustomMenuItem::new("close_backgrounds", "Remove all dynamic wallpapers"))
-        .add_item(CustomMenuItem::new("close_background_active_space", "Remove dynamic wallpapers on active space"));
-
+    let tray_menu = build_tray_menu(app_handle.clone());
     app_handle.tray_handle().set_menu(tray_menu).unwrap();
 
     return vec;
@@ -48,7 +27,7 @@ async fn download_file(identifier: String, url: String, app_handle: AppHandle) -
 
 #[tauri::command]
 fn check_if_local_exists(identifier: String) -> LocalSaveCheck {
-    return chec_for_local(identifier);
+    return check_for_local(identifier);
 }
 
 #[tauri::command]
@@ -81,22 +60,7 @@ static mut WINDOW_VEC: Vec<String> = vec![];
 
 fn main() {
 
-    let mwb_menu = CustomMenuItem::new("main_window_show", "Bring back Application Window");
-    let allsubmenu_menu = SystemTrayMenu::new();
-    let favorite_menu = SystemTrayMenu::new();
-    let all_submenu = SystemTraySubmenu::new("All cached videos", allsubmenu_menu);
-    let favorite_submenu = SystemTraySubmenu::new("Favourite videos", favorite_menu);
-
-    let tray_menu = SystemTrayMenu::new()
-        .add_item(mwb_menu)
-        .add_native_item(SystemTrayMenuItem::Separator)
-        .add_submenu(favorite_submenu)
-        .add_submenu(all_submenu)
-        .add_native_item(SystemTrayMenuItem::Separator)
-        .add_item(CustomMenuItem::new("close_backgrounds", "Remove all dynamic wallpapers"))
-        .add_item(CustomMenuItem::new("close_background_active_space", "Remove dynamic wallpapers on active space"));
-
-    let tray = SystemTray::new().with_menu(tray_menu).with_tooltip("WavyBackgrounds");
+    let tray = SystemTray::new().with_menu(build_tray_menu_once()).with_tooltip("WavyBackgrounds");
 
     tauri::Builder::default()
         .system_tray(tray)
@@ -136,6 +100,22 @@ fn main() {
                             });
                         }
                     }
+                    else if id.as_str() == "pause_background_active_space" {
+                        unsafe {
+                            for id in &WINDOW_VEC {
+                                if id_matches_current_screen(id.to_string()) {
+                                    libDynamicWallpapaper::pause_video_on_screen_with_id(id.to_string());
+                                }
+                            }
+                        }
+                    }
+                    else if id.as_str() == "pause_backgrounds" {
+                        unsafe {
+                            for id in &WINDOW_VEC {
+                                libDynamicWallpapaper::pause_video_on_screen_with_id(id.to_string());
+                            }
+                        }
+                    }
                     else {
                         apply_to_screen(id);
                     }
@@ -161,4 +141,49 @@ fn main() {
                 _ => {}
             }
         })
+}
+
+
+fn build_tray_menu(app_handle: AppHandle) -> SystemTrayMenu {
+    let vec: Vec<WallpaperVideoEntry> = get_full_database(&app_handle).unwrap();
+    let mwb_menu = CustomMenuItem::new("main_window_show", "Bring back Application Window");
+    let mut allsubmenu_menu = SystemTrayMenu::new();
+    for entry in vec.clone() {
+        let saved = check_for_local(entry.identifier.clone());
+        if saved.is_saved {
+            allsubmenu_menu = allsubmenu_menu.add_item(CustomMenuItem::new(entry.identifier.clone(), entry.friendly_name.clone()));
+        }
+    }
+    let favorite_menu = SystemTrayMenu::new();
+    let all_submenu = SystemTraySubmenu::new("All cached videos", allsubmenu_menu);
+    let favorite_submenu = SystemTraySubmenu::new("Favourite videos", favorite_menu);
+
+    SystemTrayMenu::new()
+        .add_item(mwb_menu)
+        .add_native_item(SystemTrayMenuItem::Separator)
+        .add_submenu(favorite_submenu)
+        .add_submenu(all_submenu)
+        .add_native_item(SystemTrayMenuItem::Separator)
+        .add_item(CustomMenuItem::new("close_backgrounds", "Remove all dynamic wallpapers"))
+        .add_item(CustomMenuItem::new("close_background_active_space", "Remove dynamic wallpapers on active space"))
+        .add_native_item(SystemTrayMenuItem::Separator)
+        .add_item(CustomMenuItem::new("pause_backgrounds", "Pause all dynamic wallpapers"))
+        .add_item(CustomMenuItem::new("pause_background_active_space", "Pause dynamic wallpapers on active space"))
+}
+
+fn build_tray_menu_once() -> SystemTrayMenu {
+    let mwb_menu = CustomMenuItem::new("main_window_show", "Bring back Application Window");
+    let allsubmenu_menu = SystemTrayMenu::new();
+    let favorite_menu = SystemTrayMenu::new();
+    let all_submenu = SystemTraySubmenu::new("All cached videos", allsubmenu_menu);
+    let favorite_submenu = SystemTraySubmenu::new("Favourite videos", favorite_menu);
+
+    SystemTrayMenu::new()
+        .add_item(mwb_menu)
+        .add_native_item(SystemTrayMenuItem::Separator)
+        .add_submenu(favorite_submenu)
+        .add_submenu(all_submenu)
+        .add_native_item(SystemTrayMenuItem::Separator)
+        .add_item(CustomMenuItem::new("close_backgrounds", "Remove all dynamic wallpapers"))
+        .add_item(CustomMenuItem::new("close_background_active_space", "Remove dynamic wallpapers on active space"))
 }

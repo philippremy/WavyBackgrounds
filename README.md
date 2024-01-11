@@ -9,10 +9,11 @@ A simple program to emulate the dynamic desktop wallpapers from macOS Sonoma.
 - Fetch the original macOS Sonoma background videos independently from the system
 - Ability to apply multiple dynamic backgrounds to different spaces (i.e., the current (active) space will be picked)
 - Remove dynamic backgrounds (either all at once or the one on the active space)
+- Pause dynamic backgrounds (either all at once or the one on the active space)
 - Control the app without a main window by using the System Tray
 
 ## Dependencies
-- Rust (Nightly-Chain)[^1]
+- Rust
 - Node (npm)
 
 ## Building the application
@@ -26,5 +27,3 @@ $ npm run tauri build                                      # Just build the curr
 $ npm run tauri build -- --target universal-apple-darwin   # Build a universal binary (requires both Rust Chains to be installed!)
 $ npm run tauri dev                                        # Build a live development build with Hot Reloading
 ```
-
-[^1]: If you have multiple Rust toolchains installed: First set your compiler default to nightly: `rustup default nightly`.

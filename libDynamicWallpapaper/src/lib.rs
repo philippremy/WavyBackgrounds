@@ -1,6 +1,4 @@
 #![allow(non_snake_case)]
-#![feature(const_async_blocks)]
-#![feature(type_alias_impl_trait)]
 
 use icrate::AppKit::{NSBackingStoreBuffered, NSScreen, NSView, NSWindow, NSWindowStyleMaskUnifiedTitleAndToolbar, NSUserInterfaceItemIdentification, NSApp};
 use icrate::objc2::{class, ClassType, msg_send};
@@ -12,6 +10,44 @@ use icrate::objc2::runtime::AnyObject;
 
 unsafe fn get_current_screen() -> Id<NSScreen> {
     return NSScreen::mainScreen().unwrap();
+}
+
+pub fn pause_video_on_screen_with_id(window_identifier: String) {
+    unsafe {
+        let nsapp = NSApp.unwrap();
+        for open_window in nsapp.windows() {
+            match open_window.identifier() {
+                Some(ident) => {
+                    if ident.to_string() == window_identifier {
+                        let view = open_window.contentView().unwrap();
+                        let av_playerlayer: &AnyObject = msg_send![&view, layer]; //    THIS IS An AVPlayerLayer!
+                        let av_player: &AnyObject = msg_send![av_playerlayer, player];
+                        let _: () = msg_send![av_player, pause];
+                    }
+                },
+                None => {},
+            }
+        }
+    }
+}
+
+pub fn id_matches_current_screen(window_identifier: String) -> bool {
+    unsafe {
+        let nsapp = NSApp.unwrap();
+        for open_window in nsapp.windows() {
+            if open_window.isOnActiveSpace() && open_window.isVisible() {
+                match open_window.identifier() {
+                    Some(identifier) => {
+                        if identifier.to_string() == window_identifier {
+                            return true;
+                        }
+                    },
+                    None => {}
+                }
+            }
+        }
+    }
+    return false;
 }
 
 pub fn close_window(window_identifier: String) {

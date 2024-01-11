@@ -154,7 +154,7 @@ pub fn delete_local_resource(identifier: String) -> bool {
     }
 }
 
-pub fn chec_for_local(identifier: String) -> LocalSaveCheck {
+pub fn check_for_local(identifier: String) -> LocalSaveCheck {
     let local_res_dir = get_home_directory().join(".WavyBackgrounds");
     let file_to_check = local_res_dir.join(format!("{}.mov", identifier));
     if file_to_check.exists() {
