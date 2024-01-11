@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 
-use icrate::AppKit::{NSBackingStoreBuffered, NSScreen, NSView, NSWindow, NSWindowStyleMaskUnifiedTitleAndToolbar, NSUserInterfaceItemIdentification, NSApp};
+use icrate::AppKit::{NSBackingStoreBuffered, NSScreen, NSView, NSWindow, NSWindowStyleMaskUnifiedTitleAndToolbar, NSUserInterfaceItemIdentification, NSApp, NSApplicationActivationPolicyAccessory, NSApplicationActivationPolicyRegular};
 use icrate::objc2::{class, ClassType, msg_send};
 use icrate::objc2::rc::Id;
 use std::borrow::Borrow;
@@ -146,4 +146,16 @@ pub fn apply_to_screen(identifier: String) -> String {
 
         return window_identfier;
     };
+}
+
+pub fn toggle_dock_icon(visible: bool) {
+    unsafe {
+        let nsapp = NSApp.unwrap();
+        if visible {
+            nsapp.setActivationPolicy(NSApplicationActivationPolicyRegular);
+        } else {
+            // Remove dock icon!
+            nsapp.setActivationPolicy(NSApplicationActivationPolicyAccessory);
+        }
+    }
 }

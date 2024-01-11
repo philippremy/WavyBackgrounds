@@ -3,7 +3,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use libDynamicWallpapaper::id_matches_current_screen;
-use tauri::{AppHandle, CustomMenuItem, Manager, RunEvent, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, SystemTraySubmenu, WindowBuilder, WindowUrl};
+use tauri::{AppHandle, CustomMenuItem, Manager, RunEvent, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, SystemTraySubmenu, Window, WindowBuilder, WindowUrl};
 use libResourceManager::{check_for_local, delete_local_resource, get_full_database, LocalSaveCheck, WallpaperVideoEntry};
 
 #[tauri::command]
@@ -116,6 +116,22 @@ fn main() {
                             }
                         }
                     }
+                    // THIS IS CURRENTLY HACKY, UGLY AND NOT WORKING VERY WELL. ALL VERY MUCH WIP!
+                    else if id.as_str() == "hide_dock_icon" {
+                        match ah.get_window("mainUI") {
+                            None => libDynamicWallpapaper::toggle_dock_icon(false),
+                            Some(window) => {
+                                if window.is_visible().unwrap() {
+                                    libDynamicWallpapaper::toggle_dock_icon(false);
+                                    window.set_focus().unwrap();
+                                }
+                            }
+                        }
+                    }
+                    else if id.as_str() == "show_dock_icon" {
+                        libDynamicWallpapaper::toggle_dock_icon(true);
+                    }
+                    // END OF HACKY PART
                     else {
                         apply_to_screen(id);
                     }
@@ -146,6 +162,8 @@ fn main() {
 
 fn build_tray_menu(app_handle: AppHandle) -> SystemTrayMenu {
     let vec: Vec<WallpaperVideoEntry> = get_full_database(&app_handle).unwrap();
+    let hide_icon = CustomMenuItem::new("hide_dock_icon", "Hide dock icon");
+    let show_icon = CustomMenuItem::new("show_dock_icon", "Show dock icon");
     let mwb_menu = CustomMenuItem::new("main_window_show", "Bring back Application Window");
     let mut allsubmenu_menu = SystemTrayMenu::new();
     for entry in vec.clone() {
@@ -169,9 +187,17 @@ fn build_tray_menu(app_handle: AppHandle) -> SystemTrayMenu {
         .add_native_item(SystemTrayMenuItem::Separator)
         .add_item(CustomMenuItem::new("pause_backgrounds", "Pause all dynamic wallpapers"))
         .add_item(CustomMenuItem::new("pause_background_active_space", "Pause dynamic wallpapers on active space"))
+
+        // Add new stuff here
+
+        .add_native_item(SystemTrayMenuItem::Separator)
+        .add_item(hide_icon)
+        .add_item(show_icon)
 }
 
 fn build_tray_menu_once() -> SystemTrayMenu {
+    let hide_icon = CustomMenuItem::new("hide_dock_icon", "Hide dock icon");
+    let show_icon = CustomMenuItem::new("show_dock_icon", "Show dock icon");
     let mwb_menu = CustomMenuItem::new("main_window_show", "Bring back Application Window");
     let allsubmenu_menu = SystemTrayMenu::new();
     let favorite_menu = SystemTrayMenu::new();
@@ -186,4 +212,7 @@ fn build_tray_menu_once() -> SystemTrayMenu {
         .add_native_item(SystemTrayMenuItem::Separator)
         .add_item(CustomMenuItem::new("close_backgrounds", "Remove all dynamic wallpapers"))
         .add_item(CustomMenuItem::new("close_background_active_space", "Remove dynamic wallpapers on active space"))
+        .add_native_item(SystemTrayMenuItem::Separator)
+        .add_item(hide_icon)
+        .add_item(show_icon)
 }
