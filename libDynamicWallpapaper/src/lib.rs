@@ -8,6 +8,30 @@ use std::ptr::NonNull;
 use icrate::Foundation::{NSString, NSURL};
 use icrate::objc2::runtime::AnyObject;
 
+pub fn register_login_item() {
+    unsafe {
+        let smas = class!(SMAppService);
+        let main_app: &AnyObject = msg_send![smas, mainAppService];
+        let success: Result<(), Id<icrate::Foundation::NSError>> = msg_send![main_app, registerAndReturnError: _];
+        if success.is_err() {
+            println!("Error: {:?}.", success.clone());
+        }
+    }
+}
+
+pub fn check_if_registered() -> bool {
+    unsafe {
+        let smas = class!(SMAppService);
+        let main_app: &AnyObject = msg_send![smas, mainAppService];
+        let success: i64 = msg_send![main_app, status];
+        if success == 1 {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 unsafe fn get_current_screen() -> Id<NSScreen> {
     return NSScreen::mainScreen().unwrap();
 }

@@ -2,8 +2,8 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use libDynamicWallpapaper::id_matches_current_screen;
-use tauri::{AppHandle, CustomMenuItem, Manager, RunEvent, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, SystemTraySubmenu, Window, WindowBuilder, WindowUrl};
+use libDynamicWallpapaper::{check_if_registered, id_matches_current_screen, register_login_item};
+use tauri::{AppHandle, CustomMenuItem, Manager, RunEvent, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, SystemTraySubmenu, Window, WindowBuilder, WindowUrl, Wry};
 use libResourceManager::{check_for_local, delete_local_resource, get_full_database, LocalSaveCheck, WallpaperVideoEntry};
 
 #[tauri::command]
@@ -66,6 +66,15 @@ fn main() {
         .system_tray(tray)
         .invoke_handler(tauri::generate_handler![get_full_database_command, download_file, delete_local, check_if_local_exists, apply_to_screen, remove_all, remove_current_space])
         .setup(|_app| {
+
+            if !check_if_registered() {
+                tauri::api::dialog::ask(None::<&Window<Wry>>, "Register this App for launching at startup?", "Do you want to register this App as a login/startup object (i.e., it will be restarted on every power-on and login)?", |answer| {
+                    if answer {
+                        register_login_item();
+                    }
+                });
+            }
+
             Ok(())
         })
         .on_system_tray_event(|ah, ev| {
