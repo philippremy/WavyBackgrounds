@@ -9,7 +9,7 @@
     "serve": "vite preview",
     "tauri": "tauri"
   },
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "dependencies": {
     "solid-js": "^1.7.8",
     "@tauri-apps/api": "^1.5.0"
