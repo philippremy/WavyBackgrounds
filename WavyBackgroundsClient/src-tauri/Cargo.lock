@@ -10,6 +10,7 @@ dependencies = [
  "libDynamicWallpapaper",
  "libResourceManager",
  "once_cell",
+ "os_type",
  "serde",
  "serde_json",
  "tauri",
@@ -2023,9 +2024,6 @@ name = "objc-sys"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c7c71324e4180d0899963fc83d9d241ac39e699609fc1025a850aadac8257459"
-dependencies = [
- "cc",
-]
 
 [[package]]
 name = "objc2"
@@ -2151,6 +2149,15 @@ name = "option-ext"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "04744f49eae99ab78e0d5c0b603ab218f515ea8cfe5a456d7629ad883a3b6e7d"
+
+[[package]]
+name = "os_type"
+version = "2.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e24d44c0eea30167516ed8f6daca4b5e3eebcde1bde1e4e6e08b809fb02c7ba5"
+dependencies = [
+ "regex",
+]
 
 [[package]]
 name = "overload"

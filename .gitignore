@@ -91,3 +91,10 @@ test_video.mp4
 
 # dist folders
 dist/
+
+# DS_Store files
+.DS_Store
+
+# Compiled Library and Object files
+*.a
+*.o

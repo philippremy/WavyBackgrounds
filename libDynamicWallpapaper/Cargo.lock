@@ -1975,9 +1975,6 @@ name = "objc-sys"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c7c71324e4180d0899963fc83d9d241ac39e699609fc1025a850aadac8257459"
-dependencies = [
- "cc",
-]
 
 [[package]]
 name = "objc2"

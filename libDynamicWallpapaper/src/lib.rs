@@ -1,8 +1,6 @@
 #![allow(non_snake_case)]
-#![feature(const_async_blocks)]
-#![feature(type_alias_impl_trait)]
 
-use icrate::AppKit::{NSBackingStoreBuffered, NSScreen, NSView, NSWindow, NSWindowStyleMaskUnifiedTitleAndToolbar, NSUserInterfaceItemIdentification, NSApp};
+use icrate::AppKit::{NSBackingStoreBuffered, NSScreen, NSView, NSWindow, NSWindowStyleMaskUnifiedTitleAndToolbar, NSUserInterfaceItemIdentification, NSApp, NSApplicationActivationPolicyAccessory, NSApplicationActivationPolicyRegular};
 use icrate::objc2::{class, ClassType, msg_send};
 use icrate::objc2::rc::Id;
 use std::borrow::Borrow;
@@ -10,8 +8,82 @@ use std::ptr::NonNull;
 use icrate::Foundation::{NSString, NSURL};
 use icrate::objc2::runtime::AnyObject;
 
+#[cfg(target_arch = "aarch64")]
+#[link(name = "LoginItemCheck__arm64-apple-darwin", kind = "static")]
+extern "C" {
+    fn WasLaunchedAsLoginOrResumeItem() -> i64;
+}
+
+#[cfg(target_arch = "x86_64")]
+#[link(name = "LoginItemCheck__x86_64-apple-darwin", kind = "static")]
+extern "C" {
+    fn WasLaunchedAsLoginOrResumeItem() -> i64;
+}
+
+pub fn register_login_item() {
+    unsafe {
+        let smas = class!(SMAppService);
+        let main_app: &AnyObject = msg_send![smas, mainAppService];
+        let success: Result<(), Id<icrate::Foundation::NSError>> = msg_send![main_app, registerAndReturnError: _];
+        if success.is_err() {
+            println!("Error: {:?}.", success.clone());
+        }
+    }
+}
+
+pub fn check_if_registered() -> bool {
+    unsafe {
+        let smas = class!(SMAppService);
+        let main_app: &AnyObject = msg_send![smas, mainAppService];
+        let success: i64 = msg_send![main_app, status];
+        if success == 1 {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 unsafe fn get_current_screen() -> Id<NSScreen> {
     return NSScreen::mainScreen().unwrap();
+}
+
+pub fn pause_video_on_screen_with_id(window_identifier: String) {
+    unsafe {
+        let nsapp = NSApp.unwrap();
+        for open_window in nsapp.windows() {
+            match open_window.identifier() {
+                Some(ident) => {
+                    if ident.to_string() == window_identifier {
+                        let view = open_window.contentView().unwrap();
+                        let av_playerlayer: &AnyObject = msg_send![&view, layer]; //    THIS IS An AVPlayerLayer!
+                        let av_player: &AnyObject = msg_send![av_playerlayer, player];
+                        let _: () = msg_send![av_player, pause];
+                    }
+                },
+                None => {},
+            }
+        }
+    }
+}
+
+pub fn id_matches_current_screen(window_identifier: String) -> bool {
+    unsafe {
+        let nsapp = NSApp.unwrap();
+        for open_window in nsapp.windows() {
+            if open_window.isOnActiveSpace() && open_window.isVisible() {
+                match open_window.identifier() {
+                    Some(identifier) => {
+                        if identifier.to_string() == window_identifier {
+                            return true;
+                        }
+                    },
+                    None => {}
+                }
+            }
+        }
+    }
+    return false;
 }
 
 pub fn close_window(window_identifier: String) {
@@ -110,4 +182,26 @@ pub fn apply_to_screen(identifier: String) -> String {
 
         return window_identfier;
     };
+}
+
+pub fn toggle_dock_icon(visible: bool) {
+    unsafe {
+        let nsapp = NSApp.unwrap();
+        if visible {
+            nsapp.setActivationPolicy(NSApplicationActivationPolicyRegular);
+        } else {
+            // Remove dock icon!
+            nsapp.setActivationPolicy(NSApplicationActivationPolicyAccessory);
+        }
+    }
+}
+
+pub fn check_if_launched_as_loginitem() -> bool {
+    unsafe {
+        if WasLaunchedAsLoginOrResumeItem() == 0 {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
