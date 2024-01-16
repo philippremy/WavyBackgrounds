@@ -8,6 +8,18 @@ use std::ptr::NonNull;
 use icrate::Foundation::{NSString, NSURL};
 use icrate::objc2::runtime::AnyObject;
 
+#[cfg(target_arch = "aarch64")]
+#[link(name = "LoginItemCheck__arm64-apple-darwin", kind = "static")]
+extern "C" {
+    fn WasLaunchedAsLoginOrResumeItem() -> i64;
+}
+
+#[cfg(target_arch = "x86_64")]
+#[link(name = "LoginItemCheck__x86_64-apple-darwin", kind = "static")]
+extern "C" {
+    fn WasLaunchedAsLoginOrResumeItem() -> i64;
+}
+
 pub fn register_login_item() {
     unsafe {
         let smas = class!(SMAppService);
@@ -180,6 +192,16 @@ pub fn toggle_dock_icon(visible: bool) {
         } else {
             // Remove dock icon!
             nsapp.setActivationPolicy(NSApplicationActivationPolicyAccessory);
+        }
+    }
+}
+
+pub fn check_if_launched_as_loginitem() -> bool {
+    unsafe {
+        if WasLaunchedAsLoginOrResumeItem() == 0 {
+            return true;
+        } else {
+            return false;
         }
     }
 }

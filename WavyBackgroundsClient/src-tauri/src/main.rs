@@ -2,7 +2,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use libDynamicWallpapaper::{check_if_registered, id_matches_current_screen, register_login_item};
+use libDynamicWallpapaper::{check_if_launched_as_loginitem, check_if_registered, id_matches_current_screen, register_login_item};
 use tauri::{AppHandle, CustomMenuItem, Manager, RunEvent, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, SystemTraySubmenu, Window, WindowBuilder, WindowUrl, Wry};
 use libResourceManager::{check_for_local, delete_local_resource, get_full_database, LocalSaveCheck, WallpaperVideoEntry};
 
@@ -60,6 +60,11 @@ static mut WINDOW_VEC: Vec<String> = vec![];
 
 fn main() {
 
+    // Check if the app was launched as a LoginItem, i.e., automatically after startup or login
+    if check_if_launched_as_loginitem() {
+        // TODO
+    }
+
     let tray = SystemTray::new().with_menu(build_tray_menu_once()).with_tooltip("WavyBackgrounds");
 
     tauri::Builder::default()
@@ -67,6 +72,7 @@ fn main() {
         .invoke_handler(tauri::generate_handler![get_full_database_command, download_file, delete_local, check_if_local_exists, apply_to_screen, remove_all, remove_current_space])
         .setup(|_app| {
 
+            // Check if App was registered as a LoginItem, if not, show a prompt and ask if it should be registered.
             if !check_if_registered() {
                 tauri::api::dialog::ask(None::<&Window<Wry>>, "Register this App for launching at startup?", "Do you want to register this App as a login/startup object (i.e., it will be restarted on every power-on and login)?", |answer| {
                     if answer {
