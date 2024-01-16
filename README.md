@@ -15,6 +15,7 @@ A simple program to emulate the dynamic desktop wallpapers from macOS Sonoma.
 ## Dependencies
 - Rust
 - Node (npm)
+- Apple Clang (install with `xcode-select --install`)
 
 ## Building the application
 Note that cross-compilation is not possible, as the linker requires some of Apple's Frameworks (Foundation, AppKit, AVFoundation) to be present at build-time.
