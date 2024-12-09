@@ -1,0 +1,961 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7A978C0B2CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = 7A978C012CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7A978C112CE5510700FBE646 /* WavyBackgroundsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA4DECC2CE503C800432C5E /* WavyBackgroundsKit.framework */; };
+		7A978C192CE568E000FBE646 /* IOSurfaceInterceptionKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA4DEDE2CE5040E00432C5E /* IOSurfaceInterceptionKit.framework */; };
+		7A978C1A2CE568E000FBE646 /* IOSurfaceInterceptionKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA4DEDE2CE5040E00432C5E /* IOSurfaceInterceptionKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7AA4DED22CE503C800432C5E /* WavyBackgroundsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA4DECC2CE503C800432C5E /* WavyBackgroundsKit.framework */; };
+		7AA4DED32CE503C800432C5E /* WavyBackgroundsKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA4DECC2CE503C800432C5E /* WavyBackgroundsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7AA4DF242CE505C800432C5E /* WavyBackgroundsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA4DECC2CE503C800432C5E /* WavyBackgroundsKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7A978C092CE54EDC00FBE646 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AA4DEAD2CE5037E00432C5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A978C002CE54EDC00FBE646;
+			remoteInfo = WavyBackgroundsSpaceIOSurfaceCaptureService;
+		};
+		7A978C132CE5510700FBE646 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AA4DEAD2CE5037E00432C5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AA4DECB2CE503C800432C5E;
+			remoteInfo = WavyBackgroundsKit;
+		};
+		7A978C172CE568D900FBE646 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AA4DEAD2CE5037E00432C5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AA4DEDD2CE5040E00432C5E;
+			remoteInfo = IOSurfaceInterceptionKit;
+		};
+		7A978C1B2CE568E000FBE646 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AA4DEAD2CE5037E00432C5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AA4DEDD2CE5040E00432C5E;
+			remoteInfo = IOSurfaceInterceptionKit;
+		};
+		7AA4DED02CE503C800432C5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AA4DEAD2CE5037E00432C5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AA4DECB2CE503C800432C5E;
+			remoteInfo = WavyBackgroundsKit;
+		};
+		7AA4DF262CE505C800432C5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AA4DEAD2CE5037E00432C5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AA4DECB2CE503C800432C5E;
+			remoteInfo = WavyBackgroundsKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7A978C1D2CE568E000FBE646 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7A978C1A2CE568E000FBE646 /* IOSurfaceInterceptionKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AA4DED82CE503C800432C5E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7AA4DED32CE503C800432C5E /* WavyBackgroundsKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AA4DF3E2CE5096700432C5E /* Embed XPC Services */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+				7A978C0B2CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService.xpc in Embed XPC Services */,
+			);
+			name = "Embed XPC Services";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		7A978C012CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = WavyBackgroundsSpaceIOSurfaceCaptureService.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AA4DEB52CE5037E00432C5E /* WavyBackgrounds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WavyBackgrounds.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AA4DECC2CE503C800432C5E /* WavyBackgroundsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WavyBackgroundsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AA4DEDE2CE5040E00432C5E /* IOSurfaceInterceptionKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IOSurfaceInterceptionKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		7A978C0C2CE54EDC00FBE646 /* Exceptions for "WavyBackgroundsSpaceIOSurfaceCaptureService" folder in "WavyBackgroundsSpaceIOSurfaceCaptureService" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 7A978C002CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService */;
+		};
+		7AA4DED42CE503C800432C5E /* Exceptions for "WavyBackgroundsKit" folder in "WavyBackgroundsKit" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			publicHeaders = (
+				External/CoreGraphicsPrivate.h,
+				External/ExternalTypes.h,
+				External/HIServices.h,
+				External/SkyLight.h,
+				WavyBackgroundsKit.h,
+			);
+			target = 7AA4DECB2CE503C800432C5E /* WavyBackgroundsKit */;
+		};
+		7AA4DEE62CE5040E00432C5E /* Exceptions for "IOSurfaceInterceptionKit" folder in "IOSurfaceInterceptionKit" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			publicHeaders = (
+				IOInterception.h,
+				IOSurfaceInterceptionKit.h,
+			);
+			target = 7AA4DEDD2CE5040E00432C5E /* IOSurfaceInterceptionKit */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		7A978C022CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7A978C0C2CE54EDC00FBE646 /* Exceptions for "WavyBackgroundsSpaceIOSurfaceCaptureService" folder in "WavyBackgroundsSpaceIOSurfaceCaptureService" target */,
+			);
+			path = WavyBackgroundsSpaceIOSurfaceCaptureService;
+			sourceTree = "<group>";
+		};
+		7AA4DEB72CE5037E00432C5E /* WavyBackgrounds */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = WavyBackgrounds;
+			sourceTree = "<group>";
+		};
+		7AA4DECD2CE503C800432C5E /* WavyBackgroundsKit */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7AA4DED42CE503C800432C5E /* Exceptions for "WavyBackgroundsKit" folder in "WavyBackgroundsKit" target */,
+			);
+			path = WavyBackgroundsKit;
+			sourceTree = "<group>";
+		};
+		7AA4DEDF2CE5040E00432C5E /* IOSurfaceInterceptionKit */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				7AA4DEE62CE5040E00432C5E /* Exceptions for "IOSurfaceInterceptionKit" folder in "IOSurfaceInterceptionKit" target */,
+			);
+			path = IOSurfaceInterceptionKit;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7A978BFE2CE54EDC00FBE646 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A978C112CE5510700FBE646 /* WavyBackgroundsKit.framework in Frameworks */,
+				7A978C192CE568E000FBE646 /* IOSurfaceInterceptionKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AA4DEB22CE5037E00432C5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AA4DED22CE503C800432C5E /* WavyBackgroundsKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AA4DEC92CE503C800432C5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AA4DEDB2CE5040E00432C5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AA4DF242CE505C800432C5E /* WavyBackgroundsKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7AA4DEAC2CE5037E00432C5E = {
+			isa = PBXGroup;
+			children = (
+				7AA4DEB72CE5037E00432C5E /* WavyBackgrounds */,
+				7AA4DECD2CE503C800432C5E /* WavyBackgroundsKit */,
+				7AA4DEDF2CE5040E00432C5E /* IOSurfaceInterceptionKit */,
+				7A978C022CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService */,
+				7AA4DF232CE505C800432C5E /* Frameworks */,
+				7AA4DEB62CE5037E00432C5E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7AA4DEB62CE5037E00432C5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7AA4DEB52CE5037E00432C5E /* WavyBackgrounds.app */,
+				7AA4DECC2CE503C800432C5E /* WavyBackgroundsKit.framework */,
+				7AA4DEDE2CE5040E00432C5E /* IOSurfaceInterceptionKit.framework */,
+				7A978C012CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService.xpc */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7AA4DF232CE505C800432C5E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7AA4DEC72CE503C800432C5E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AA4DED92CE5040E00432C5E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		7A978C002CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A978C0D2CE54EDC00FBE646 /* Build configuration list for PBXNativeTarget "WavyBackgroundsSpaceIOSurfaceCaptureService" */;
+			buildPhases = (
+				7A978BFD2CE54EDC00FBE646 /* Sources */,
+				7A978BFE2CE54EDC00FBE646 /* Frameworks */,
+				7A978BFF2CE54EDC00FBE646 /* Resources */,
+				7A978C1D2CE568E000FBE646 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A978C182CE568D900FBE646 /* PBXTargetDependency */,
+				7A978C142CE5510700FBE646 /* PBXTargetDependency */,
+				7A978C1C2CE568E000FBE646 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7A978C022CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService */,
+			);
+			name = WavyBackgroundsSpaceIOSurfaceCaptureService;
+			packageProductDependencies = (
+			);
+			productName = WavyBackgroundsSpaceIOSurfaceCaptureService;
+			productReference = 7A978C012CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService.xpc */;
+			productType = "com.apple.product-type.xpc-service";
+		};
+		7AA4DEB42CE5037E00432C5E /* WavyBackgrounds */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AA4DEC42CE5038100432C5E /* Build configuration list for PBXNativeTarget "WavyBackgrounds" */;
+			buildPhases = (
+				7AA4DEB12CE5037E00432C5E /* Sources */,
+				7AA4DEB22CE5037E00432C5E /* Frameworks */,
+				7AA4DEB32CE5037E00432C5E /* Resources */,
+				7AA4DED82CE503C800432C5E /* Embed Frameworks */,
+				7AA4DF3E2CE5096700432C5E /* Embed XPC Services */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7AA4DED12CE503C800432C5E /* PBXTargetDependency */,
+				7A978C0A2CE54EDC00FBE646 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7AA4DEB72CE5037E00432C5E /* WavyBackgrounds */,
+			);
+			name = WavyBackgrounds;
+			packageProductDependencies = (
+			);
+			productName = WavyBackgrounds;
+			productReference = 7AA4DEB52CE5037E00432C5E /* WavyBackgrounds.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7AA4DECB2CE503C800432C5E /* WavyBackgroundsKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AA4DED52CE503C800432C5E /* Build configuration list for PBXNativeTarget "WavyBackgroundsKit" */;
+			buildPhases = (
+				7AA4DEC72CE503C800432C5E /* Headers */,
+				7AA4DEC82CE503C800432C5E /* Sources */,
+				7AA4DEC92CE503C800432C5E /* Frameworks */,
+				7AA4DECA2CE503C800432C5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				7AA4DECD2CE503C800432C5E /* WavyBackgroundsKit */,
+			);
+			name = WavyBackgroundsKit;
+			packageProductDependencies = (
+			);
+			productName = WavyBackgroundsKit;
+			productReference = 7AA4DECC2CE503C800432C5E /* WavyBackgroundsKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7AA4DEDD2CE5040E00432C5E /* IOSurfaceInterceptionKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AA4DEE72CE5040E00432C5E /* Build configuration list for PBXNativeTarget "IOSurfaceInterceptionKit" */;
+			buildPhases = (
+				7AA4DED92CE5040E00432C5E /* Headers */,
+				7AA4DEDA2CE5040E00432C5E /* Sources */,
+				7AA4DEDB2CE5040E00432C5E /* Frameworks */,
+				7AA4DEDC2CE5040E00432C5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7AA4DF272CE505C800432C5E /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7AA4DEDF2CE5040E00432C5E /* IOSurfaceInterceptionKit */,
+			);
+			name = IOSurfaceInterceptionKit;
+			packageProductDependencies = (
+			);
+			productName = IOSurfaceInterceptionKit;
+			productReference = 7AA4DEDE2CE5040E00432C5E /* IOSurfaceInterceptionKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7AA4DEAD2CE5037E00432C5E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					7A978C002CE54EDC00FBE646 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					7AA4DEB42CE5037E00432C5E = {
+						CreatedOnToolsVersion = 16.0;
+						LastSwiftMigration = 1600;
+					};
+					7AA4DECB2CE503C800432C5E = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					7AA4DEDD2CE5040E00432C5E = {
+						CreatedOnToolsVersion = 16.0;
+						LastSwiftMigration = 1600;
+					};
+				};
+			};
+			buildConfigurationList = 7AA4DEB02CE5037E00432C5E /* Build configuration list for PBXProject "WavyBackgrounds" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7AA4DEAC2CE5037E00432C5E;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 7AA4DEB62CE5037E00432C5E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7AA4DEB42CE5037E00432C5E /* WavyBackgrounds */,
+				7AA4DECB2CE503C800432C5E /* WavyBackgroundsKit */,
+				7AA4DEDD2CE5040E00432C5E /* IOSurfaceInterceptionKit */,
+				7A978C002CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7A978BFF2CE54EDC00FBE646 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AA4DEB32CE5037E00432C5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AA4DECA2CE503C800432C5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AA4DEDC2CE5040E00432C5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7A978BFD2CE54EDC00FBE646 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AA4DEB12CE5037E00432C5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AA4DEC82CE503C800432C5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AA4DEDA2CE5040E00432C5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7A978C0A2CE54EDC00FBE646 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A978C002CE54EDC00FBE646 /* WavyBackgroundsSpaceIOSurfaceCaptureService */;
+			targetProxy = 7A978C092CE54EDC00FBE646 /* PBXContainerItemProxy */;
+		};
+		7A978C142CE5510700FBE646 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AA4DECB2CE503C800432C5E /* WavyBackgroundsKit */;
+			targetProxy = 7A978C132CE5510700FBE646 /* PBXContainerItemProxy */;
+		};
+		7A978C182CE568D900FBE646 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AA4DEDD2CE5040E00432C5E /* IOSurfaceInterceptionKit */;
+			targetProxy = 7A978C172CE568D900FBE646 /* PBXContainerItemProxy */;
+		};
+		7A978C1C2CE568E000FBE646 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AA4DEDD2CE5040E00432C5E /* IOSurfaceInterceptionKit */;
+			targetProxy = 7A978C1B2CE568E000FBE646 /* PBXContainerItemProxy */;
+		};
+		7AA4DED12CE503C800432C5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AA4DECB2CE503C800432C5E /* WavyBackgroundsKit */;
+			targetProxy = 7AA4DED02CE503C800432C5E /* PBXContainerItemProxy */;
+		};
+		7AA4DF272CE505C800432C5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AA4DECB2CE503C800432C5E /* WavyBackgroundsKit */;
+			targetProxy = 7AA4DF262CE505C800432C5E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		7A978C0E2CE54EDC00FBE646 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = WavyBackgroundsSpaceIOSurfaceCaptureService/WavyBackgroundsSpaceIOSurfaceCaptureService.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FWM5LYB4M;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WavyBackgroundsSpaceIOSurfaceCaptureService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WavyBackgroundsSpaceIOSurfaceCaptureService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST)_$(_BOOL_$(SKIP_INSTALL)))",
+					"@executable_path/../../../../Frameworks",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-F",
+					/System/Library/PrivateFrameworks,
+					"-framework",
+					SkyLight,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.philippremy.WavyBackgroundsSpaceIOSurfaceCaptureService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7A978C0F2CE54EDC00FBE646 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = WavyBackgroundsSpaceIOSurfaceCaptureService/WavyBackgroundsSpaceIOSurfaceCaptureService.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7FWM5LYB4M;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WavyBackgroundsSpaceIOSurfaceCaptureService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WavyBackgroundsSpaceIOSurfaceCaptureService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST)_$(_BOOL_$(SKIP_INSTALL)))",
+					"@executable_path/../../../../Frameworks",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-F",
+					/System/Library/PrivateFrameworks,
+					"-framework",
+					SkyLight,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.philippremy.WavyBackgroundsSpaceIOSurfaceCaptureService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		7AA4DEC22CE5038100432C5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7AA4DEC32CE5038100432C5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		7AA4DEC52CE5038100432C5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WavyBackgrounds/WavyBackgrounds.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WavyBackgrounds/Preview Content\"";
+				DEVELOPMENT_TEAM = 7FWM5LYB4M;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-F",
+					/System/Library/PrivateFrameworks,
+					"-framework",
+					SkyLight,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.philippremy.WavyBackgrounds;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WavyBackgrounds/SpacesView/Metal/WavyBackgrounds-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7AA4DEC62CE5038100432C5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WavyBackgrounds/WavyBackgrounds.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WavyBackgrounds/Preview Content\"";
+				DEVELOPMENT_TEAM = 7FWM5LYB4M;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-F",
+					/System/Library/PrivateFrameworks,
+					"-framework",
+					SkyLight,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.philippremy.WavyBackgrounds;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WavyBackgrounds/SpacesView/Metal/WavyBackgrounds-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		7AA4DED62CE503C800432C5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7FWM5LYB4M;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				OTHER_LDFLAGS = (
+					"-F",
+					/System/Library/PrivateFrameworks,
+					"-framework",
+					SkyLight,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.philippremy.WavyBackgroundsKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7AA4DED72CE503C800432C5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7FWM5LYB4M;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				OTHER_LDFLAGS = (
+					"-F",
+					/System/Library/PrivateFrameworks,
+					"-framework",
+					SkyLight,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.philippremy.WavyBackgroundsKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7AA4DEE82CE5040E00432C5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7FWM5LYB4M;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = de.philippremy.IOSurfaceInterceptionKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7AA4DEE92CE5040E00432C5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7FWM5LYB4M;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = de.philippremy.IOSurfaceInterceptionKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7A978C0D2CE54EDC00FBE646 /* Build configuration list for PBXNativeTarget "WavyBackgroundsSpaceIOSurfaceCaptureService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A978C0E2CE54EDC00FBE646 /* Debug */,
+				7A978C0F2CE54EDC00FBE646 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AA4DEB02CE5037E00432C5E /* Build configuration list for PBXProject "WavyBackgrounds" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AA4DEC22CE5038100432C5E /* Debug */,
+				7AA4DEC32CE5038100432C5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AA4DEC42CE5038100432C5E /* Build configuration list for PBXNativeTarget "WavyBackgrounds" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AA4DEC52CE5038100432C5E /* Debug */,
+				7AA4DEC62CE5038100432C5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AA4DED52CE503C800432C5E /* Build configuration list for PBXNativeTarget "WavyBackgroundsKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AA4DED62CE503C800432C5E /* Debug */,
+				7AA4DED72CE503C800432C5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AA4DEE72CE5040E00432C5E /* Build configuration list for PBXNativeTarget "IOSurfaceInterceptionKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AA4DEE82CE5040E00432C5E /* Debug */,
+				7AA4DEE92CE5040E00432C5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7AA4DEAD2CE5037E00432C5E /* Project object */;
+}
