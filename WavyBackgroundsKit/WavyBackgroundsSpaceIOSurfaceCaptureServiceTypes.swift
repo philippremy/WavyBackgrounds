@@ -7,14 +7,14 @@
 
 import Foundation
 
-public enum SpaceIOSurfaceCaptureServiceRequestType : Codable, BitwiseCopyable {
+public enum SpaceIOSurfaceCaptureServiceRequestType : Codable {
     case RequestIOSurfaceForSpaceID
     case UpdateRefreshFPS
     case ToggleShouldIncludeOtherWindows
     case ScheduleSpaceIDsForRemoval
 }
 
-public enum SpaceIOSurfaceCaptureServiceResponseType : Codable, BitwiseCopyable {
+public enum SpaceIOSurfaceCaptureServiceResponseType : Codable {
     case Error
     case Ok
 }
