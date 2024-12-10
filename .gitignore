@@ -91,3 +91,14 @@ test_video.mp4
 
 # dist folders
 dist/
+
+#configs
+.nvim
+.nvim/
+.nvim/*
+
+#build files
+build
+build/
+build/*
+buildServer.json
