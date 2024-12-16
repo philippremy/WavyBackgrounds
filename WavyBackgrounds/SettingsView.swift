@@ -137,12 +137,12 @@ struct SettingsView: View {
         .onChange(of: self.viewModel.shouldIncludeForeignWindows, {
             
             if CGPreflightScreenCaptureAccess() {
-                let _ = try! self.viewModel.spaceCaptureServiceConnection.sendSync(message: prepareSpaceIOSurfaceCaptureServiceRequest(requestType: .ToggleShouldIncludeOtherWindows, shouldIncludeOtherWindows: self.viewModel.shouldIncludeForeignWindows))
+                let _ = try! self.viewModel.spaceCaptureServiceConnection.sendSync(message: encodeSpaceIOSurfaceCaptureServiceRequest(requestType: .ToggleShouldIncludeOtherWindows, shouldIncludeOtherWindows: self.viewModel.shouldIncludeForeignWindows))
                 return
             }
             
             if CGRequestScreenCaptureAccess() {
-                let _ = try! self.viewModel.spaceCaptureServiceConnection.sendSync(message: prepareSpaceIOSurfaceCaptureServiceRequest(requestType: .ToggleShouldIncludeOtherWindows, shouldIncludeOtherWindows: self.viewModel.shouldIncludeForeignWindows))
+                let _ = try! self.viewModel.spaceCaptureServiceConnection.sendSync(message: encodeSpaceIOSurfaceCaptureServiceRequest(requestType: .ToggleShouldIncludeOtherWindows, shouldIncludeOtherWindows: self.viewModel.shouldIncludeForeignWindows))
                 return
             }
             
@@ -154,7 +154,7 @@ struct SettingsView: View {
         // Change of the FPS Slider, needs to be converted
         .onChange(of: self.viewModel.sliderValue, {
             self.viewModel.fps = self.viewModel.sliderValues[Int(self.viewModel.sliderValue)]
-            let _ = try! self.viewModel.spaceCaptureServiceConnection.sendSync(message: prepareSpaceIOSurfaceCaptureServiceRequest(requestType: .UpdateRefreshFPS, fps: self.viewModel.fps))
+            let _ = try! self.viewModel.spaceCaptureServiceConnection.sendSync(message: encodeSpaceIOSurfaceCaptureServiceRequest(requestType: .UpdateRefreshFPS, fps: self.viewModel.fps))
         })
         
         // MARK: Alerts

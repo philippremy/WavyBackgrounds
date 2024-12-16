@@ -29,9 +29,9 @@ func startListener() {
             // message is received.
             request.accept(incomingMessageHandler: { (dict: XPCDictionary) in
                 guard let xpc_obj = decodeRequestAndPerform(with: dict) else {
-                    return prepareNonFatalError()
+                    return encodeNonFatalError()
                 }
-                return prepareSuccess(xpcObj: xpc_obj)
+                return encodeSuccess(xpcObj: xpc_obj)
             }, cancellationHandler: { xpcError in
                 exit(0)
             })
@@ -46,7 +46,6 @@ func startListener() {
 
 // The function that performs the work of the service.
 func decodeRequestAndPerform(with message: XPCDictionary) -> xpc_object_t? {
-    
     
     guard let requestObject: xpc_object_t = message["xpcRequest"] else {
         print("No value for key 'xpcRequest' found in XPCDictionary!")
@@ -80,27 +79,6 @@ func decodeRequestAndPerform(with message: XPCDictionary) -> xpc_object_t? {
     }
     
     return nil
-}
-
-func prepareNonFatalError() -> XPCDictionary {
-    let temp_arr: [SpaceIOSurfaceCaptureServiceResponse] = [
-        SpaceIOSurfaceCaptureServiceResponse(requestType: .Error, error: "Non-fatal Error occured. Probably tried to fetch an IOSurface while the Manager was still initializing.")
-    ]
-    let xpc_obj = xpc_data_create(temp_arr, MemoryLayout<SpaceIOSurfaceCaptureServiceResponse>.stride * temp_arr.count)
-    var xpc_dict = XPCDictionary()
-    xpc_dict["xpcResponse"] = xpc_obj
-    return xpc_dict
-}
-
-func prepareSuccess(xpcObj: xpc_object_t) -> XPCDictionary {
-    let temp_arr: [SpaceIOSurfaceCaptureServiceResponse] = [
-        SpaceIOSurfaceCaptureServiceResponse(requestType: .Ok, error: nil)
-    ]
-    let xpc_obj = xpc_data_create(temp_arr, MemoryLayout<SpaceIOSurfaceCaptureServiceResponse>.stride * temp_arr.count)
-    var xpc_dict = XPCDictionary()
-    xpc_dict["xpcResponse"] = xpc_obj
-    xpc_dict["ioSurfaceXPCObject"] = xpcObj
-    return xpc_dict
 }
 
 /*

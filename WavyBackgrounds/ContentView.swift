@@ -55,8 +55,8 @@ struct ContentView: View {
         .onAppear() {
             
             // Update FPS and IncludeOtherWindowsInService
-            let _ = try! self.globalState.spaceCaptureServiceConnection.sendSync(message: prepareSpaceIOSurfaceCaptureServiceRequest(requestType: .UpdateRefreshFPS, fps: self.globalState.fps))
-            let _ = try! self.globalState.spaceCaptureServiceConnection.sendSync(message: prepareSpaceIOSurfaceCaptureServiceRequest(requestType: .ToggleShouldIncludeOtherWindows, shouldIncludeOtherWindows: self.globalState.shouldIncludeForeignWindows))
+            let _ = try! self.globalState.spaceCaptureServiceConnection.sendSync(message: encodeSpaceIOSurfaceCaptureServiceRequest(requestType: .UpdateRefreshFPS, fps: self.globalState.fps))
+            let _ = try! self.globalState.spaceCaptureServiceConnection.sendSync(message: encodeSpaceIOSurfaceCaptureServiceRequest(requestType: .ToggleShouldIncludeOtherWindows, shouldIncludeOtherWindows: self.globalState.shouldIncludeForeignWindows))
             
             
         }

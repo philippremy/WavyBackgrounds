@@ -106,7 +106,7 @@ class InternalSpaceRefreshManager {
                         return self.currentSpaceIDs.contains(where: { elem2 in return elem2 == elem })
                     })
                     self.xpcQueue.async {
-                        try! GlobalViewState.sharedInstance.spaceCaptureServiceConnection.send(message: prepareSpaceIOSurfaceCaptureServiceRequest(requestType: .ScheduleSpaceIDsForRemoval, spaceIDsToBeRemoved: unmatchedSpaces))
+                        try! GlobalViewState.sharedInstance.spaceCaptureServiceConnection.send(message: encodeSpaceIOSurfaceCaptureServiceRequest(requestType: .ScheduleSpaceIDsForRemoval, spaceIDsToBeRemoved: unmatchedSpaces))
                     }
                 }
                 shouldUpdate = true

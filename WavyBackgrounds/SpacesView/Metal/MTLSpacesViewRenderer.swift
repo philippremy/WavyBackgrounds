@@ -104,7 +104,7 @@ public final class MTLSpacesRenderer: NSObject, MTKViewDelegate {
         DispatchQueue.concurrentPerform(iterations: self.globalState.spaceIDs.count, execute: { index in
             var ioSurface: IOSurfaceRef? = nil
             
-            let request = prepareSpaceIOSurfaceCaptureServiceRequest(requestType: .RequestIOSurfaceForSpaceID, spaceID: self.globalState.spaceIDs[index])
+            let request = encodeSpaceIOSurfaceCaptureServiceRequest(requestType: .RequestIOSurfaceForSpaceID, spaceID: self.globalState.spaceIDs[index])
             do {
                 let answer = try self.globalState.spaceCaptureServiceConnection.sendSync(message: request)
                 guard let xpcResponse: xpc_object_t = answer["xpcResponse"] else {
