@@ -13,7 +13,8 @@ import WavyBackgroundsKit
 @objc public class IOInterceptionManager : NSObject {
     
     // Singleton accessor
-    @objc public static let sharedInstance = IOInterceptionManager()
+    // SAFETY: Concurrency-safe, because class is internally synchronized (NSLock)
+    @objc nonisolated(unsafe) public static let sharedInstance = IOInterceptionManager()
     
     // Public Members
     public let instanceLock = NSLock()
